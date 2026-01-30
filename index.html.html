@@ -25,10 +25,12 @@
             --c-green: #50fa7b;  
             --c-orange: #ffb86c; 
             --c-red: #ff5555;    
+            --c-yellow: #f1fa8c; 
+            --c-indigo: #caa9fa; 
 
-            /* Fonts - تم توحيد الخط ليكون Outfit لمحاكاة Gemini */
+            /* Fonts */
             --font-brand: 'Outfit', sans-serif;
-            --font-body: 'Outfit', sans-serif; /* تغيير الخط العام */
+            --font-body: 'Outfit', sans-serif;
         }
 
         * {
@@ -59,7 +61,7 @@
             border: 2px solid var(--c-cyan);
             color: var(--c-cyan);
             padding: 8px 18px;
-            border-radius: 50px; /* جعل الأزرار أكثر دائرية مثل Gemini */
+            border-radius: 50px;
             cursor: pointer;
             font-weight: 700;
             text-transform: uppercase;
@@ -74,18 +76,17 @@
             box-shadow: 0 0 15px rgba(57, 197, 187, 0.4);
         }
 
-        /* --- Header & Logo Modification (New Style) --- */
-        
+        /* --- Header & Logo --- */
         header {
-            margin: 80px 0 60px 0;
+            margin: 60px 0 40px 0;
             text-align: center;
             width: 100%;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
         }
 
-        /* حاوية الشعار الجديدة */
         .logo-wrapper {
             position: relative;
             display: inline-flex;
@@ -93,19 +94,17 @@
             align-items: center;
         }
 
-        /* تنسيق كلمة R2 الضخمة */
         .logo-main {
             font-family: 'Outfit', sans-serif;
-            font-weight: 700; /* نفس وزن خط العناوين في Gemini */
+            font-weight: 700;
             font-size: 10rem; 
             line-height: 0.8;
             color: #ffffff;
-            letter-spacing: -6px; /* تقليل المسافة لجعل الحروف متماسكة */
+            letter-spacing: -6px;
             margin: 0;
             z-index: 1;
         }
 
-        /* تنسيق كلمة Services في المنتصف */
         .logo-middle {
             position: absolute;
             top: 50%;
@@ -114,22 +113,32 @@
             font-family: 'Outfit', sans-serif;
             font-weight: 600;
             font-size: 1.2rem;
-            letter-spacing: 12px; /* تباعد كبير جداً للأحرف */
+            letter-spacing: 12px;
             color: var(--c-cyan);
             text-transform: uppercase;
-            background-color: var(--bg-color); /* خلفية بنفس لون الصفحة لعمل تأثير القطع */
+            background-color: var(--bg-color);
             padding: 5px 20px;
             z-index: 2;
             white-space: nowrap;
         }
 
-        /* Grid Container */
+        .header-desc {
+            margin-top: 30px;
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            max-width: 700px;
+            line-height: 1.6;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        /* Grid Container - Adjusted for smaller cards */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 40px; /* Increased gap to help shrink cards visually */
             width: 90%;
-            max-width: 1400px;
+            max-width: 1050px; /* Reduced width to make cards smaller */
             padding: 20px;
             margin-bottom: auto; 
         }
@@ -139,7 +148,7 @@
             background: rgba(22, 27, 34, 0.5);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 28px; /* زوايا أكثر استدارة لتناسب الستايل الجديد */
+            border-radius: 28px;
             aspect-ratio: 1 / 1;
             display: flex;
             flex-direction: column;
@@ -149,17 +158,21 @@
             transition: all 0.3s ease;
         }
 
+        /* Modified: Bigger Icons */
         .r2-card i {
-            font-size: 4rem;
-            margin-bottom: 20px;
+            font-size: 5.5rem; /* Increased size */
+            margin-bottom: 15px;
             transition: transform 0.3s ease;
         }
 
+        /* Modified: Bigger Text */
         .r2-card span {
-            font-weight: 600;
-            font-size: 1.2rem; 
+            font-weight: 700;
+            font-size: 1.5rem; /* Increased size */
             text-transform: uppercase;
             letter-spacing: 1px;
+            text-align: center;
+            line-height: 1.2;
         }
 
         /* Hover Effects */
@@ -186,9 +199,15 @@
         
         .card-games:hover { border-color: var(--c-orange); box-shadow: 0 0 30px rgba(255, 184, 108, 0.2); }
         .card-games:hover i { color: var(--c-orange); transform: scale(1.1); }
-        
-        .card-media:hover { border-color: var(--c-red); box-shadow: 0 0 30px rgba(255, 85, 85, 0.2); }
-        .card-media:hover i { color: var(--c-red); transform: scale(1.1); }
+
+        .card-security:hover { border-color: var(--c-yellow); box-shadow: 0 0 30px rgba(241, 250, 140, 0.2); }
+        .card-security:hover i { color: var(--c-yellow); transform: scale(1.1); }
+
+        .card-movies:hover { border-color: var(--c-indigo); box-shadow: 0 0 30px rgba(202, 169, 250, 0.2); }
+        .card-movies:hover i { color: var(--c-indigo); transform: scale(1.1); }
+
+        .card-stock:hover { border-color: var(--c-red); box-shadow: 0 0 30px rgba(255, 85, 85, 0.2); }
+        .card-stock:hover i { color: var(--c-red); transform: scale(1.1); }
 
 
         /* Modal Overlay */
@@ -358,6 +377,11 @@
         body.rtl .close-modal { left: 25px; right: auto; }
         
         /* Mobile */
+        @media (max-width: 900px) {
+            .grid-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
         @media (max-width: 600px) {
             .grid-container {
                 grid-template-columns: repeat(1, 1fr); 
@@ -366,6 +390,7 @@
             .logo-main { font-size: 6rem; }
             .logo-middle { font-size: 0.8rem; letter-spacing: 6px; padding: 0 10px; }
             .design-gallery { grid-template-columns: repeat(2, 1fr); }
+            .header-desc { font-size: 1rem; }
         }
     </style>
 </head>
@@ -378,6 +403,9 @@
             <h1 class="logo-main">R2</h1>
             <div class="logo-middle">Services</div>
         </div>
+        <p class="header-desc" data-key="headerDesc">
+            Your gateway to digital mastery. We offer a wide range of professional services and tools, most of which are completely free, to help you learn, create, and secure your digital presence.
+        </p>
     </header>
 
     <div class="grid-container">
@@ -406,14 +434,24 @@
             <span data-key="hacking">R2 Hacking</span>
         </div>
 
+        <div class="r2-card card-security" onclick="openContent('security')">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span data-key="security">R2 Security</span>
+        </div>
+
         <div class="r2-card card-games" onclick="openContent('games')">
             <i class="fa-solid fa-gamepad"></i>
             <span data-key="games">R2 Games</span>
         </div>
 
-        <div class="r2-card card-media" onclick="openContent('media')">
-            <i class="fa-solid fa-film"></i>
-            <span data-key="media">R2 Cinematic</span>
+        <div class="r2-card card-movies" onclick="openContent('movies')">
+            <i class="fa-solid fa-clapperboard"></i>
+            <span data-key="movies">R2 Movies</span>
+        </div>
+
+        <div class="r2-card card-stock" onclick="openContent('stock')">
+            <i class="fa-solid fa-photo-film"></i>
+            <span data-key="stock">R2 Stock Media</span>
         </div>
     </div>
 
@@ -431,28 +469,34 @@
     <script>
         const translations = {
             en: {
+                headerDesc: "Your gateway to digital mastery. We offer a wide range of professional services and tools, most of which are completely free, to help you learn, create, and secure your digital presence.",
                 learn: "R2 Learn",
                 studio: "R2 Studio",
                 ai: "R2 AI",
                 design: "R2 Design",
                 hacking: "R2 Hacking",
+                security: "R2 Security",
                 games: "R2 Games",
-                media: "R2 Cinematic",
+                movies: "R2 Movies",
+                stock: "R2 Stock Media",
                 comingSoon: "COMING SOON",
                 descLearn: "Connect with us on our social platforms to start learning.",
                 descStudio: "Download R2 apps and get the latest news on our Telegram channel.",
-                descDesign: "COMING SOON", //Explore our latest creative design projects.
+                descDesign: "COMING SOON", 
                 descGen: "This innovative section is currently under development.",
                 sample: "Design Sample"
             },
             ar: {
+                headerDesc: "بوابتك نحو الاحتراف الرقمي. نقدم مجموعة واسعة من الخدمات والأدوات الاحترافية، ومعظمها مجاني تماماً، لمساعدتك في التعلم، الإبداع، وتأمين وجودك الرقمي.",
                 learn: "R2 تعليم",
                 studio: "R2 ستوديو",
                 ai: "R2 ذكاء اصطناعي",
                 design: "R2 تصميم",
                 hacking: "R2 هاكينج",
+                security: "R2 حماية",
                 games: "R2 ألعاب",
-                media: "R2 ميديا",
+                movies: "R2 أفلام",
+                stock: "R2 ستوك ميديا",
                 comingSoon: "قريباً",
                 descLearn: "تواصل معنا عبر منصات التواصل الاجتماعي لبدء التعلم.",
                 descStudio: "حمل تطبيقات R2 واحصل على آخر الأخبار عبر قناتنا على تيليجرام.",
@@ -538,8 +582,15 @@
 
         function getColorVar(type) {
             const map = {
-                'learn': 'cyan', 'studio': 'purple', 'ai': 'blue',
-                'design': 'pink', 'hacking': 'green', 'games': 'orange', 'media': 'red'
+                'learn': 'cyan', 
+                'studio': 'purple', 
+                'ai': 'blue',
+                'design': 'pink', 
+                'hacking': 'green', 
+                'security': 'yellow', 
+                'games': 'orange', 
+                'movies': 'indigo', 
+                'stock': 'red'
             };
             return map[type];
         }
