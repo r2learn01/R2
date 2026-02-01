@@ -6,14 +6,12 @@
     <title>R2</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
         :root {
             --bg-color: #0b0c15;
-            --card-bg: #161b22;
             --text-main: #ffffff;
             --text-dim: #9ca3af;
             
@@ -28,8 +26,6 @@
             --c-yellow: #f1fa8c; 
             --c-indigo: #caa9fa; 
 
-            /* Fonts */
-            --font-brand: 'Outfit', sans-serif;
             --font-body: 'Outfit', sans-serif;
         }
 
@@ -45,16 +41,12 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start; 
-            padding-bottom: 40px;
+            overflow-x: hidden;
         }
 
-        /* Language Button */
+        /* --- Language Button --- */
         .lang-btn {
-            position: absolute;
+            position: fixed;
             top: 25px;
             right: 25px;
             background: transparent;
@@ -64,26 +56,27 @@
             border-radius: 50px;
             cursor: pointer;
             font-weight: 700;
-            text-transform: uppercase;
-            font-size: 0.9rem;
+            z-index: 1000;
             transition: 0.3s;
-            z-index: 100;
+        }
+        .lang-btn:hover { background: var(--c-cyan); color: var(--bg-color); }
+
+        /* --- HOME VIEW --- */
+        #home-view {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            transition: opacity 0.5s ease;
+            padding-bottom: 40px;
         }
 
-        .lang-btn:hover {
-            background: var(--c-cyan);
-            color: var(--bg-color);
-            box-shadow: 0 0 15px rgba(57, 197, 187, 0.4);
-        }
-
-        /* --- Header & Logo --- */
+        /* --- RESTORED LOGO STYLE --- */
         header {
             margin: 60px 0 40px 0;
             text-align: center;
-            width: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
         }
 
@@ -95,13 +88,11 @@
         }
 
         .logo-main {
-            font-family: 'Outfit', sans-serif;
-            font-weight: 700;
-            font-size: 10rem; 
+            font-size: 10rem;
+            font-weight: 800;
             line-height: 0.8;
             color: #ffffff;
             letter-spacing: -6px;
-            margin: 0;
             z-index: 1;
         }
 
@@ -110,7 +101,6 @@
             top: 50%;
             left: 54%;
             transform: translate(-50%, -50%);
-            font-family: 'Outfit', sans-serif;
             font-weight: 600;
             font-size: 1.2rem;
             letter-spacing: 12px;
@@ -125,30 +115,26 @@
         .header-desc {
             margin-top: 30px;
             color: var(--text-dim);
-            font-size: 1.1rem;
-            max-width: 700px;
+            max-width: 600px;
             line-height: 1.6;
             padding: 0 20px;
             text-align: center;
         }
 
-        /* Grid Container - Adjusted for smaller cards */
+        /* --- GRID SYSTEM --- */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr); 
-            gap: 40px; /* Increased gap to help shrink cards visually */
+            gap: 30px;
             width: 90%;
-            max-width: 1050px; /* Reduced width to make cards smaller */
+            max-width: 1000px;
             padding: 20px;
-            margin-bottom: auto; 
         }
 
-        /* Icons (Cards) */
         .r2-card {
             background: rgba(22, 27, 34, 0.5);
-            backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 28px;
+            border-radius: 24px;
             aspect-ratio: 1 / 1;
             display: flex;
             flex-direction: column;
@@ -158,239 +144,205 @@
             transition: all 0.3s ease;
         }
 
-        /* Modified: Bigger Icons */
-        .r2-card i {
-            font-size: 5.5rem; /* Increased size */
-            margin-bottom: 15px;
+        .r2-card i { font-size: 4.5rem; margin-bottom: 15px; transition: 0.3s; }
+        .r2-card span { font-weight: 700; font-size: 1.2rem; text-transform: uppercase; }
+        
+        .r2-card:hover { transform: translateY(-8px); background: rgba(22, 27, 34, 0.9); }
+        
+        /* Card Colors */
+        .card-learn:hover { border-color: var(--c-cyan); } .card-learn:hover i { color: var(--c-cyan); }
+        .card-studio:hover { border-color: var(--c-purple); } .card-studio:hover i { color: var(--c-purple); }
+        .card-design:hover { border-color: var(--c-pink); } .card-design:hover i { color: var(--c-pink); }
+        .card-movies:hover { border-color: var(--c-indigo); } .card-movies:hover i { color: var(--c-indigo); }
+        .card-ai:hover { border-color: var(--c-blue); } .card-ai:hover i { color: var(--c-blue); }
+        .card-hacking:hover { border-color: var(--c-green); } .card-hacking:hover i { color: var(--c-green); }
+        .card-security:hover { border-color: var(--c-yellow); } .card-security:hover i { color: var(--c-yellow); }
+        .card-games:hover { border-color: var(--c-orange); } .card-games:hover i { color: var(--c-orange); }
+        .card-stock:hover { border-color: var(--c-red); } .card-stock:hover i { color: var(--c-red); }
+
+        /* --- SUB PAGE VIEW --- */
+        #page-view {
+            display: none;
+            opacity: 0;
+            width: 100%;
+            min-height: 100vh;
+            padding: 20px;
+            background: var(--bg-color);
+            transition: opacity 0.5s ease;
+        }
+
+        /* --- MODIFIED HEADER FOR SUB-PAGES --- */
+        .page-header {
+            position: relative; /* Essential for absolute positioning of back button */
+            display: flex;
+            justify-content: center; /* Centers the title */
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto 40px auto;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .back-btn {
+            position: absolute; /* Takes button out of flow */
+            left: 0; /* Pins to left */
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-dim);
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            z-index: 10;
+        }
+        .back-btn:hover { color: var(--text-main); }
+
+        .page-title { 
+            font-size: 2.5rem; 
+            text-transform: uppercase; 
+            font-weight: 800; 
+            margin: 0;
+            text-align: center;
+        }
+
+        .page-content-wrapper { max-width: 1200px; margin: 0 auto; }
+
+        /* --- Content Styles --- */
+        
+        /* Socials */
+        .social-grid { display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; margin-top: 50px; }
+        .social-link { font-size: 3.5rem; color: #fff; transition: 0.2s; }
+        .social-link:hover { transform: scale(1.1); }
+        .social-link.youtube:hover { color: #ff0000; }
+        .social-link.facebook:hover { color: #1877f2; }
+        .social-link.instagram:hover { color: #e4405f; }
+        .social-link.twitter:hover { color: #1da1f2; }
+        .social-link.tiktok:hover { color: #00f2ea; }
+
+        /* Studio List */
+        .studio-alert {
+            background: rgba(189, 147, 249, 0.1);
+            border: 1px solid var(--c-purple);
+            color: var(--c-purple);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+        .studio-link {
+            display: inline-block;
+            background: var(--c-purple);
+            color: #0b0c15;
+            padding: 10px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+        .studio-link:hover { background: #fff; }
+
+        .file-list { margin-top: 40px; display: flex; flex-direction: column; gap: 15px; }
+        .file-item {
+            background: #161b22;
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-decoration: none;
+            color: #fff;
+        }
+        .file-item:hover { border-color: var(--c-purple); background: #1c2128; }
+        .file-info h3 { margin-bottom: 5px; font-size: 1.1rem; }
+        .file-info p { color: #888; font-size: 0.9rem; }
+        .file-icon { font-size: 1.5rem; color: var(--c-purple); }
+
+        /* Design Masonry */
+        .masonry-grid {
+            column-count: 4; 
+            column-gap: 20px;
+            width: 100%;
+        }
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 20px;
+            background: #161b22;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
             transition: transform 0.3s ease;
         }
+        .masonry-item:hover { transform: translateY(-5px); border-color: var(--c-pink); }
+        .masonry-item img { width: 100%; display: block; height: auto; }
+        .masonry-title { padding: 15px; font-weight: 600; color: #ddd; font-size: 0.9rem; text-align: center; }
 
-        /* Modified: Bigger Text */
-        .r2-card span {
-            font-weight: 700;
-            font-size: 1.5rem; /* Increased size */
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-align: center;
-            line-height: 1.2;
+        /* Movies Grid */
+        .movies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
         }
-
-        /* Hover Effects */
-        .r2-card:hover {
-            transform: translateY(-8px);
-            background: rgba(22, 27, 34, 0.9);
+        .movie-card {
+            background: #161b22;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.3s;
         }
-        
-        /* Color Mapping */
-        .card-learn:hover { border-color: var(--c-cyan); box-shadow: 0 0 30px rgba(57, 197, 187, 0.2); }
-        .card-learn:hover i { color: var(--c-cyan); transform: scale(1.1); }
-        
-        .card-studio:hover { border-color: var(--c-purple); box-shadow: 0 0 30px rgba(189, 147, 249, 0.2); }
-        .card-studio:hover i { color: var(--c-purple); transform: scale(1.1); }
-        
-        .card-design:hover { border-color: var(--c-pink); box-shadow: 0 0 30px rgba(255, 121, 198, 0.2); }
-        .card-design:hover i { color: var(--c-pink); transform: scale(1.1); }
-        
-        .card-ai:hover { border-color: var(--c-blue); box-shadow: 0 0 30px rgba(139, 233, 253, 0.2); }
-        .card-ai:hover i { color: var(--c-blue); transform: scale(1.1); }
-        
-        .card-hacking:hover { border-color: var(--c-green); box-shadow: 0 0 30px rgba(80, 250, 123, 0.2); }
-        .card-hacking:hover i { color: var(--c-green); transform: scale(1.1); }
-        
-        .card-games:hover { border-color: var(--c-orange); box-shadow: 0 0 30px rgba(255, 184, 108, 0.2); }
-        .card-games:hover i { color: var(--c-orange); transform: scale(1.1); }
-
-        .card-security:hover { border-color: var(--c-yellow); box-shadow: 0 0 30px rgba(241, 250, 140, 0.2); }
-        .card-security:hover i { color: var(--c-yellow); transform: scale(1.1); }
-
-        .card-movies:hover { border-color: var(--c-indigo); box-shadow: 0 0 30px rgba(202, 169, 250, 0.2); }
-        .card-movies:hover i { color: var(--c-indigo); transform: scale(1.1); }
-
-        .card-stock:hover { border-color: var(--c-red); box-shadow: 0 0 30px rgba(255, 85, 85, 0.2); }
-        .card-stock:hover i { color: var(--c-red); transform: scale(1.1); }
-
-
-        /* Modal Overlay */
-        .modal-overlay {
-            position: fixed;
+        .movie-card:hover { border-color: var(--c-indigo); }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            background: #000;
+        }
+        .video-container iframe {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
+            border: 0;
+        }
+        .movie-title { padding: 15px; font-size: 1rem; font-weight: 600; text-align: center; }
+
+        /* Coming Soon */
+        .cs-wrapper {
+            height: 50vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 1000;
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .modal-content {
-            background: #11131a;
-            border: 1px solid #30363d;
-            padding: 40px;
-            border-radius: 32px;
-            text-align: center;
-            max-width: 800px;
-            width: 95%;
-            max-height: 85vh; 
-            overflow-y: auto; 
-            transform: scale(0.9);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-        }
-
-        .modal-content::-webkit-scrollbar { width: 8px; }
-        .modal-content::-webkit-scrollbar-track { background: #0b0c15; }
-        .modal-content::-webkit-scrollbar-thumb { background: #30363d; border-radius: 4px; }
-
-        .modal-overlay.active .modal-content {
-            transform: scale(1);
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 20px;
-            right: 25px;
-            font-size: 2rem;
-            color: var(--text-dim);
-            cursor: pointer;
-            z-index: 10;
-        }
-        .close-modal:hover { color: var(--c-red); }
-
-        .modal-title {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .modal-desc {
-            color: var(--text-dim);
-            margin-bottom: 30px;
-            font-size: 1.1rem;
-            line-height: 1.6;
-        }
-
-        .coming-soon {
-            font-size: 3rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin: 40px 0;
-        }
-
-        /* --- Social Links --- */
-        .social-links {
-            display: flex;
             justify-content: center;
-            gap: 25px;
-            flex-wrap: wrap;
-            margin-top: 20px;
         }
+        .cs-text { font-size: 3rem; font-weight: 800; opacity: 0.3; text-transform: uppercase; letter-spacing: 5px; text-align: center; }
 
-        .social-icon {
-            font-size: 2.5rem;
-            color: var(--text-main);
-            transition: transform 0.2s, color 0.2s;
-        }
-
-        .social-icon:hover { transform: translateY(-5px); }
-        .social-icon.youtube:hover { color: #FF0000; }
-        .social-icon.facebook:hover { color: #1877F2; }
-        .social-icon.instagram:hover { color: #E4405F; }
-        .social-icon.twitter:hover { color: #1DA1F2; } 
-        .social-icon.tiktok:hover { color: #00f2ea; }
-
-        /* --- Design Gallery Grid --- */
-        .design-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-            gap: 15px;
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        .design-card {
-            background: #1c2128;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: transform 0.2s;
-        }
-        
-        .design-card:hover {
-            transform: scale(1.05);
-            border-color: var(--c-pink);
-        }
-
-        .design-img {
-            width: 100%;
-            height: 120px;
-            object-fit: cover;
-            background-color: #2d333b;
-        }
-
-        .design-title {
-            padding: 10px;
-            font-size: 0.8rem;
-            color: #ccc;
-            font-weight: 600;
-        }
-
-        /* --- Footer --- */
-        footer {
-            margin-top: 50px;
-            color: #484f58;
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-        }
-
-        .action-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--c-purple);
-            color: #000;
-            padding: 14px 35px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            transition: 0.3s;
-        }
-        .action-btn:hover { background: white; }
-
-        /* RTL Handling */
+        /* RTL Specifics */
         body.rtl { direction: rtl; }
+        body.rtl .back-btn { left: auto; right: 0; flex-direction: row-reverse; }
+        body.rtl .back-btn i { transform: rotate(180deg); }
         body.rtl .lang-btn { left: 25px; right: auto; }
-        body.rtl .close-modal { left: 25px; right: auto; }
-        
-        /* Mobile */
+
+        /* Mobile Responsive */
         @media (max-width: 900px) {
-            .grid-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .grid-container { grid-template-columns: repeat(2, 1fr); }
+            .masonry-grid { column-count: 3; }
         }
         @media (max-width: 600px) {
-            .grid-container {
-                grid-template-columns: repeat(1, 1fr); 
-                width: 80%;
-            }
+            .grid-container { grid-template-columns: 1fr; }
             .logo-main { font-size: 6rem; }
-            .logo-middle { font-size: 0.8rem; letter-spacing: 6px; padding: 0 10px; }
-            .design-gallery { grid-template-columns: repeat(2, 1fr); }
-            .header-desc { font-size: 1rem; }
+            .logo-middle { font-size: 0.8rem; letter-spacing: 6px; }
+            .masonry-grid { column-count: 2; }
+            .page-title { font-size: 1.8rem; }
+            .back-btn span { display: none; } /* Hide text "Back" on small screens, keep icon */
         }
     </style>
 </head>
@@ -398,115 +350,279 @@
 
     <button class="lang-btn" onclick="toggleLanguage()">AR / EN</button>
 
-    <header>
-        <div class="logo-wrapper">
-            <h1 class="logo-main">R2</h1>
-            <div class="logo-middle">Services</div>
-        </div>
-        <p class="header-desc" data-key="headerDesc">
-            Your gateway to digital mastery. We offer a wide range of professional services and tools, most of which are completely free, to help you learn, create, and secure your digital presence.
-        </p>
-    </header>
+    <main id="home-view">
+        <header>
+            <div class="logo-wrapper">
+                <h1 class="logo-main">R2</h1>
+                <div class="logo-middle">Services</div>
+            </div>
+            <p class="header-desc" data-key="headerDesc">
+                Your gateway to digital mastery. Learn, create, and secure your digital presence with our professional tools.
+            </p>
+        </header>
 
-    <div class="grid-container">
-        <div class="r2-card card-learn" onclick="openContent('learn')">
-            <i class="fa-solid fa-graduation-cap"></i>
-            <span data-key="learn">R2 Learn</span>
+        <div class="grid-container">
+            <div class="r2-card card-learn" onclick="openPage('learn')">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <span data-key="learn">R2 Learn</span>
+            </div>
+            <div class="r2-card card-studio" onclick="openPage('studio')">
+                <i class="fa-solid fa-layer-group"></i>
+                <span data-key="studio">R2 Studio</span>
+            </div>
+            <div class="r2-card card-design" onclick="openPage('design')">
+                <i class="fa-solid fa-pen-nib"></i>
+                <span data-key="design">R2 Design</span>
+            </div>
+            <div class="r2-card card-movies" onclick="openPage('movies')">
+                <i class="fa-solid fa-clapperboard"></i>
+                <span data-key="movies">R2 Movies</span>
+            </div>
+            <div class="r2-card card-ai" onclick="openPage('ai')">
+                <i class="fa-solid fa-brain"></i>
+                <span data-key="ai">R2 AI</span>
+            </div>
+            <div class="r2-card card-hacking" onclick="openPage('hacking')">
+                <i class="fa-solid fa-user-secret"></i>
+                <span data-key="hacking">R2 Hacking</span>
+            </div>
+            <div class="r2-card card-security" onclick="openPage('security')">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span data-key="security">R2 Security</span>
+            </div>
+            <div class="r2-card card-games" onclick="openPage('games')">
+                <i class="fa-solid fa-gamepad"></i>
+                <span data-key="games">R2 Games</span>
+            </div>
+            <div class="r2-card card-stock" onclick="openPage('stock')">
+                <i class="fa-solid fa-photo-film"></i>
+                <span data-key="stock">R2 Stock Media</span>
+            </div>
         </div>
+        
+        <footer style="margin-bottom: 20px; color: #444; font-weight: bold; font-size: 0.8rem; letter-spacing: 2px;">
+            &copy; 2026 R2 SERVICES
+        </footer>
+    </main>
 
-        <div class="r2-card card-studio" onclick="openContent('studio')">
-            <i class="fa-solid fa-layer-group"></i>
-            <span data-key="studio">R2 Studio</span>
+    <div id="page-view">
+        <div class="page-header">
+            <div class="back-btn" onclick="goBack()">
+                <i class="fa-solid fa-arrow-left"></i> 
+                <span data-key="back">Back</span>
+            </div>
+            <h2 class="page-title" id="pageTitle">Service Name</h2>
         </div>
-
-        <div class="r2-card card-design" onclick="openContent('design')">
-            <i class="fa-solid fa-pen-nib"></i>
-            <span data-key="design">R2 Design</span>
-        </div>
-
-        <div class="r2-card card-ai" onclick="openContent('ai')">
-            <i class="fa-solid fa-brain"></i>
-            <span data-key="ai">R2 AI</span>
-        </div>
-
-        <div class="r2-card card-hacking" onclick="openContent('hacking')">
-            <i class="fa-solid fa-user-secret"></i>
-            <span data-key="hacking">R2 Hacking</span>
-        </div>
-
-        <div class="r2-card card-security" onclick="openContent('security')">
-            <i class="fa-solid fa-shield-halved"></i>
-            <span data-key="security">R2 Security</span>
-        </div>
-
-        <div class="r2-card card-games" onclick="openContent('games')">
-            <i class="fa-solid fa-gamepad"></i>
-            <span data-key="games">R2 Games</span>
-        </div>
-
-        <div class="r2-card card-movies" onclick="openContent('movies')">
-            <i class="fa-solid fa-clapperboard"></i>
-            <span data-key="movies">R2 Movies</span>
-        </div>
-
-        <div class="r2-card card-stock" onclick="openContent('stock')">
-            <i class="fa-solid fa-photo-film"></i>
-            <span data-key="stock">R2 Stock Media</span>
-        </div>
-    </div>
-
-    <footer>
-        ALL RIGHTS RESERVED &copy; 2026
-    </footer>
-
-    <div class="modal-overlay" id="modalOverlay">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <div id="modalBody"></div>
-        </div>
+        
+        <div class="page-content-wrapper" id="pageContent">
+            </div>
     </div>
 
     <script>
         const translations = {
             en: {
-                headerDesc: "Your gateway to digital mastery. We offer a wide range of professional services and tools, most of which are completely free, to help you learn, create, and secure your digital presence.",
-                learn: "R2 Learn",
-                studio: "R2 Studio",
-                ai: "R2 AI",
-                design: "R2 Design",
-                hacking: "R2 Hacking",
-                security: "R2 Security",
-                games: "R2 Games",
-                movies: "R2 Movies",
-                stock: "R2 Stock Media",
+                headerDesc: "Your gateway to digital mastery. We offer a wide range of professional services and tools, most of which are completely free.",
+                learn: "R2 Learn", studio: "R2 Studio", design: "R2 Design", movies: "R2 Movies",
+                ai: "R2 AI", hacking: "R2 Hacking", security: "R2 Security", games: "R2 Games", stock: "R2 Stock",
+                back: "Back",
                 comingSoon: "COMING SOON",
-                descLearn: "Connect with us on our social platforms to start learning.",
-                descStudio: "Download R2 apps and get the latest news on our Telegram Group.",
-                descDesign: "COMING SOON", 
-                descGen: "This innovative section is currently under development.",
-                sample: "Design Sample"
+                studioAlert: "Important: This group is for discussion and turning your ideas into free apps/websites if possible.",
+                joinGroup: "Join Telegram Group",
+                studioFiles: "R2 Studio Files",
+                learnDesc: "Connect with us to start learning:"
             },
             ar: {
-                headerDesc: "بوابتك نحو الاحتراف الرقمي. نقدم مجموعة واسعة من الخدمات والأدوات الاحترافية، ومعظمها مجاني تماماً، لمساعدتك في التعلم، الإبداع، وتأمين وجودك الرقمي.",
-                learn: "R2 تعليم",
-                studio: "R2 ستوديو",
-                ai: "R2 ذكاء اصطناعي",
-                design: "R2 تصميم",
-                hacking: "R2 هاكينج",
-                security: "R2 حماية",
-                games: "R2 ألعاب",
-                movies: "R2 أفلام",
-                stock: "R2 ستوك ميديا",
+                headerDesc: "بوابتك نحو الاحتراف الرقمي. نقدم مجموعة واسعة من الخدمات والأدوات الاحترافية، ومعظمها مجاني تماماً.",
+                learn: "R2 تعليم", studio: "R2 ستوديو", design: "R2 تصميم", movies: "R2 أفلام",
+                ai: "R2 ذكاء اصطناعي", hacking: "R2 هاكينج", security: "R2 حماية", games: "R2 ألعاب", stock: "R2 ستوك",
+                back: "رجوع",
                 comingSoon: "قريباً",
-                descLearn: "تواصل معنا عبر منصات التواصل الاجتماعي لبدء التعلم.",
-                descStudio: "حمل تطبيقات R2 واحصل على آخر الأخبار عبر قناتنا على تيليجرام.",
-                descDesign: "استكشف أحدث مشاريع التصميم الإبداعية لدينا.",
-                descGen: "هذا القسم المبتكر قيد التطوير حالياً.",
-                sample: "نموذج تصميم"
+                studioAlert: "تنبيه: هذا الجروب للنقاش وتحويل أفكاركم إلى تطبيقات ومواقع مجاناً إن أمكن.",
+                joinGroup: "انضم لجروب تيليجرام",
+                studioFiles: "ملفات R2 ستوديو",
+                learnDesc: "تواصل معنا لبدء التعلم:"
             }
         };
 
         let currentLang = 'en';
+
+        // ----------------------------------------------------
+        // DEVELOPER CONTENT AREA (تمت تعبئتها ببيانات وهمية)
+        // ----------------------------------------------------
+
+        // 1. R2 Studio Content (Files)
+        const studioContent = [
+            // { 
+            //     html: `
+            //     <a href="#" class="file-item">
+            //         <div class="file-info">
+            //             <h3>Project Alpha v1.0</h3>
+            //             <p>Latest build for Android (APK)</p>
+            //         </div>
+            //         <div class="file-icon"><i class="fa-solid fa-download"></i></div>
+            //     </a>`
+            // },
+            // { 
+            //     html: `
+            //     <a href="#" class="file-item">
+            //         <div class="file-info">
+            //             <h3>Web Tool Helper</h3>
+            //             <p>Source code (ZIP)</p>
+            //         </div>
+            //         <div class="file-icon"><i class="fa-solid fa-file-zipper"></i></div>
+            //     </a>`
+            // },
+            // { 
+            //     html: `
+            //     <a href="#" class="file-item">
+            //         <div class="file-info">
+            //             <h3>User Manual PDF</h3>
+            //             <p>Guide for new users</p>
+            //         </div>
+            //         <div class="file-icon"><i class="fa-solid fa-file-pdf"></i></div>
+            //     </a>`
+            // }
+        ];
+
+        // 2. R2 Design Content (Images)
+        const designContent = [
+            // { img: 'https://placehold.co/400x600/1a1f2e/ff79c6?text=Mobile+UI', title: 'App Interface' },
+            // { img: 'https://placehold.co/400x300/1a1f2e/ff79c6?text=Banner+Ad', title: 'Marketing Banner' },
+            // { img: 'https://placehold.co/400x500/1a1f2e/ff79c6?text=Poster', title: 'Event Poster' },
+            // { img: 'https://placehold.co/400x400/1a1f2e/ff79c6?text=Logo+Set', title: 'Brand Identity' },
+            // { img: 'https://placehold.co/400x700/1a1f2e/ff79c6?text=Long+Infographic', title: 'Infographic' },
+            // { img: 'https://placehold.co/400x350/1a1f2e/ff79c6?text=Card', title: 'Business Card' }
+        ];
+
+        // 3. R2 Movies Content (Videos)
+        const movieContent = [
+            // { 
+            //     html: `
+            //     <div class="video-container">
+            //         <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+            //     </div>
+            //     <div class="movie-title">Introduction to R2</div>` 
+            // },
+            // { 
+            //     html: `
+            //     <div class="video-container">
+            //         <iframe src="https://www.youtube.com/embed/jfKfPfyJRdk" allowfullscreen></iframe>
+            //     </div>
+            //     <div class="movie-title">Cyber Security Basics</div>` 
+            // },
+            // { 
+            //     html: `
+            //     <div class="video-container">
+            //         <iframe src="https://www.youtube.com/embed/5qap5aO4i9A" allowfullscreen></iframe>
+            //     </div>
+            //     <div class="movie-title">Lo-Fi Coding Music</div>` 
+            // }
+        ];
+
+
+        function openPage(type) {
+            const home = document.getElementById('home-view');
+            const page = document.getElementById('page-view');
+            const title = document.getElementById('pageTitle');
+            const content = document.getElementById('pageContent');
+            const t = translations[currentLang];
+            const colorVar = `var(--c-${getColorVar(type)})`;
+
+            // Set Title & Color
+            title.innerText = t[type] || type.toUpperCase();
+            title.style.color = colorVar;
+
+            // Generate Content
+            let html = '';
+
+            if (type === 'learn') {
+                html = `
+                    <p style="text-align:center; color:#888; margin-bottom:20px;">${t.learnDesc}</p>
+                    <div class="social-grid">
+                        <a href="https://www.youtube.com/@R2learn" target="_blank" class="social-link youtube"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="https://facebook.com/share/1D23joczdE" target="_blank" class="social-link facebook"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="https://instagram.com/r2learn_" target="_blank" class="social-link instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://x.com/r2learn01" target="_blank" class="social-link twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="https://tiktok.com/@r2learn" target="_blank" class="social-link tiktok"><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                `;
+            } 
+            else if (type === 'studio') {
+                html += `
+                    <div class="studio-alert">
+                        <i class="fa-solid fa-circle-exclamation" style="margin-bottom:10px; font-size:1.5rem;"></i><br>
+                        ${t.studioAlert}
+                        <br>
+                        <a href="https://t.me/r2stud" target="_blank" class="studio-link">${t.joinGroup}</a>
+                    </div>
+                    <h3 style="color:#fff; border-bottom:1px solid #333; padding-bottom:10px; margin-top:40px;">${t.studioFiles}</h3>
+                    <div class="file-list">
+                `;
+                // Inject Content
+                if(studioContent.length > 0) studioContent.forEach(item => html += item.html);
+                else html += `<p style="color:#444; text-align:center; padding:20px;">No files available yet.</p>`;
+                
+                html += `</div>`;
+            } 
+            else if (type === 'design') {
+                html = `<div class="masonry-grid">`;
+                if(designContent.length > 0) {
+                    designContent.forEach(item => {
+                        html += `
+                            <div class="masonry-item">
+                                <img src="${item.img}" alt="${item.title}">
+                                <div class="masonry-title">${item.title}</div>
+                            </div>
+                        `;
+                    });
+                } else {
+                     html += `<p style="color:#444; grid-column:span 4; text-align:center;">No designs yet.</p>`;
+                }
+                html += `</div>`;
+            }
+            else if (type === 'movies') {
+                html = `<div class="movies-grid">`;
+                if(movieContent.length > 0) {
+                    movieContent.forEach(item => html += `<div class="movie-card">${item.html}</div>`);
+                } else {
+                    html += `<p style="color:#444; grid-column:span 3; text-align:center;">No movies yet.</p>`;
+                }
+                html += `</div>`;
+            }
+            else {
+                // Coming Soon
+                html = `
+                    <div class="cs-wrapper">
+                        <i class="fa-solid fa-person-digging" style="font-size:4rem; color:${colorVar}; margin-bottom:20px;"></i>
+                        <div class="cs-text" style="color:${colorVar}">${t.comingSoon}</div>
+                    </div>
+                `;
+            }
+
+            content.innerHTML = html;
+
+            // Animation
+            home.style.opacity = '0';
+            setTimeout(() => {
+                home.style.display = 'none';
+                page.style.display = 'block';
+                void page.offsetWidth; 
+                page.style.opacity = '1';
+                window.scrollTo(0, 0);
+            }, 500);
+        }
+
+        function goBack() {
+            const home = document.getElementById('home-view');
+            const page = document.getElementById('page-view');
+            page.style.opacity = '0';
+            setTimeout(() => {
+                page.style.display = 'none';
+                home.style.display = 'flex';
+                void home.offsetWidth;
+                home.style.opacity = '1';
+            }, 500);
+        }
 
         function toggleLanguage() {
             currentLang = currentLang === 'en' ? 'ar' : 'en';
@@ -519,85 +635,14 @@
             });
         }
 
-        function openContent(type) {
-            const modal = document.getElementById('modalOverlay');
-            const body = document.getElementById('modalBody');
-            const t = translations[currentLang];
-            let content = '';
-            let colorVar = `var(--c-${getColorVar(type)})`;
-
-            if (type === 'learn') {
-                content = `
-                    <h2 class="modal-title" style="color: ${colorVar}">${t.learn}</h2>
-                    <p class="modal-desc">${t.descLearn}</p>
-                    <div class="social-links">
-                        <a href="https://www.youtube.com/@R2learn" target="_blank" class="social-icon youtube"><i class="fa-brands fa-youtube"></i></a>
-                        <a href="https://facebook.com/share/1D23joczdE" target="_blank" class="social-icon facebook"><i class="fa-brands fa-facebook"></i></a>
-                        <a href="https://instagram.com/r2learn_" target="_blank" class="social-icon instagram"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="https://x.com/r2learn01" target="_blank" class="social-icon twitter"><i class="fa-brands fa-x-twitter"></i></a>
-                        <a href="https://tiktok.com/@r2learn" target="_blank" class="social-icon tiktok"><i class="fa-brands fa-tiktok"></i></a>
-                    </div>
-                `;
-            } else if (type === 'studio') {
-                content = `
-                    <h2 class="modal-title" style="color: ${colorVar}">${t.studio}</h2>
-                    <p class="modal-desc">${t.descStudio}</p>
-                    <a href="https://t.me/r2stud" target="_blank" class="action-btn">
-                        <i class="fa-brands fa-telegram"></i> Telegram Group
-                    </a>
-                `;
-            } else if (type === 'design') {
-                let cardsHTML = '';
-                for(let i=1; i<=15; i++) {
-                    let imgUrl = `https://placehold.co/300x200/252a33/ff79c6?text=Design+${i}`;
-                    cardsHTML += `
-                        <div class="design-card">
-                            <img src="${imgUrl}" alt="Design ${i}" class="design-img">
-                            <div class="design-title">${t.sample} ${i}</div>
-                        </div>
-                    `;
-                }
-                content = `
-                    <h2 class="modal-title" style="color: ${colorVar}">${t.design}</h2>
-                    <p class="modal-desc">${t.descDesign}</p>
-                    <div class="design-gallery">
-                        ${cardsHTML}
-                    </div>
-                `;
-            } else {
-                content = `
-                    <h2 class="modal-title" style="color: ${colorVar}">${t[type]}</h2>
-                    <p class="modal-desc">${t.descGen}</p>
-                    <div class="coming-soon" style="color: ${colorVar}">${t.comingSoon}</div>
-                `;
-            }
-
-            body.innerHTML = content;
-            modal.classList.add('active');
-        }
-
-        function closeModal() {
-            document.getElementById('modalOverlay').classList.remove('active');
-        }
-
         function getColorVar(type) {
             const map = {
-                'learn': 'cyan', 
-                'studio': 'purple', 
-                'ai': 'blue',
-                'design': 'pink', 
-                'hacking': 'green', 
-                'security': 'yellow', 
-                'games': 'orange', 
-                'movies': 'indigo', 
-                'stock': 'red'
+                'learn': 'cyan', 'studio': 'purple', 'ai': 'blue',
+                'design': 'pink', 'hacking': 'green', 'security': 'yellow', 
+                'games': 'orange', 'movies': 'indigo', 'stock': 'red'
             };
-            return map[type];
+            return map[type] || 'cyan';
         }
-
-        document.getElementById('modalOverlay').addEventListener('click', function(e) {
-            if (e.target === this) closeModal();
-        });
     </script>
 </body>
 </html>
